@@ -1,0 +1,51 @@
+<pre>
+  BIP: 1
+  Layer: Consensus (soft fork)
+  Title: Pay to Quantum-Resistant Hash (P2QRH)
+  Author: Bitcoin PQC Team
+  Comments-Summary: No comments yet.
+  Comments-URI: https://github.com/bitcoin-pqc/bitcoin-core-patch/issues
+  Status: Draft
+  Type: Standards Track
+  Created: 2024-03-21
+  License: BSD-2-Clause
+</pre>
+
+==Abstract==
+
+This BIP proposes a new opcode `OP_CHECKPQCVERIFY` that enables quantum-resistant signature verification in Bitcoin script, allowing for the creation of quantum-resistant payment addresses.
+
+==Motivation==
+
+The advent of quantum computing poses a potential threat to Bitcoin's current ECDSA signatures. This BIP introduces a mechanism to create quantum-resistant payment addresses, providing a path for users to secure their funds against potential quantum attacks.
+
+==Specification==
+
+===New Opcode===
+
+* OP_CHECKPQCVERIFY (0xb1)
+  * Pops the top three items from the stack: public key, signature, and message hash
+  * Verifies the quantum-resistant signature against the message hash using the provided public key
+  * Fails if verification fails
+  * Succeeds if verification passes
+
+===Address Format===
+
+[To be specified: Details about the new address format for quantum-resistant payments]
+
+===Signature Scheme===
+
+[To be specified: Details about the specific quantum-resistant signature scheme to be used]
+
+==Backward Compatibility==
+
+This is a soft fork, as it only adds a new opcode. Old nodes will treat transactions using this opcode as "anyone can spend" transactions, while new nodes will enforce the quantum-resistant signature verification.
+
+==Reference Implementation==
+
+The reference implementation is available in the bitcoin-core-patch repository:
+https://github.com/bitcoin-pqc/bitcoin-core-patch
+
+==Rationale==
+
+[To be expanded: Discussion of signature scheme choices, security considerations, and implementation details] 

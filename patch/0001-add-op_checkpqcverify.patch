@@ -1,14 +1,13 @@
-From: Mayckon Giovani <doomhammerhell@gmail.com>
-Subject: [PATCH] add OP_CHECKPQCVERIFY opcode
-
----
- src/script/interpreter.cpp | 3 +++
- 1 file changed, 3 insertions(+)
-
+diff --git a/src/script/interpreter.cpp b/src/script/interpreter.cpp
+index e69de29..abcdef1 100644
 --- a/src/script/interpreter.cpp
 +++ b/src/script/interpreter.cpp
-@@ -NNNN,6 +NNNN,9 @@
-     // TODO: implement post-quantum signature verification
-+    case OP_CHECKPQCVERIFY:
-+        // TODO: call verify_pqc_signature(publicKey, signature, messageHash);
-+        break;
+@@ -1058,6 +1058,9 @@ bool EvalScript(const CScript& scriptSig, const CScript& scriptPubKey, CScriptExec
+                case OP_CHECKSIG:
+                case OP_CHECKSIGVERIFY:
+                    if (!CheckSignature(pubkey, sig, scriptCode)) return false;
+                    break;
++               case OP_CHECKPQCVERIFY:
++                   // TODO: call verify_pqc_signature(publicKey, signature, messageHash);
++                   break;
+                case OP_CHECKSIGADD:

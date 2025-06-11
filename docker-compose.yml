@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  bitcoin-patched-1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - bitcoin-patched-1-data:/home/bitcoin/.bitcoin
+    ports:
+      - "18444:18444"  # RPC
+      - "18445:18445"  # P2P
+    command: bitcoind -regtest -server=1 -rpcuser=bitcoin -rpcpassword=bitcoin -rpcallowip=0.0.0.0/0 -rpcbind=0.0.0.0 -printtoconsole=1 -debug=1
+
+  bitcoin-patched-2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - bitcoin-patched-2-data:/home/bitcoin/.bitcoin
+    ports:
+      - "18446:18444"  # RPC
+      - "18447:18445"  # P2P
+    command: bitcoind -regtest -server=1 -rpcuser=bitcoin -rpcpassword=bitcoin -rpcallowip=0.0.0.0/0 -rpcbind=0.0.0.0 -printtoconsole=1 -debug=1
+
+  bitcoin-legacy-1:
+    image: ruimarinho/bitcoin-core:25.0
+    volumes:
+      - bitcoin-legacy-1-data:/home/bitcoin/.bitcoin
+    ports:
+      - "18448:18444"  # RPC
+      - "18449:18445"  # P2P
+    command: bitcoind -regtest -server=1 -rpcuser=bitcoin -rpcpassword=bitcoin -rpcallowip=0.0.0.0/0 -rpcbind=0.0.0.0 -printtoconsole=1 -debug=1
+
+  bitcoin-legacy-2:
+    image: ruimarinho/bitcoin-core:25.0
+    volumes:
+      - bitcoin-legacy-2-data:/home/bitcoin/.bitcoin
+    ports:
+      - "18450:18444"  # RPC
+      - "18451:18445"  # P2P
+    command: bitcoind -regtest -server=1 -rpcuser=bitcoin -rpcpassword=bitcoin -rpcallowip=0.0.0.0/0 -rpcbind=0.0.0.0 -printtoconsole=1 -debug=1
+
+volumes:
+  bitcoin-patched-1-data:
+  bitcoin-patched-2-data:
+  bitcoin-legacy-1-data:
+  bitcoin-legacy-2-data: 

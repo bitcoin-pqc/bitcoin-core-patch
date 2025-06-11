@@ -1,0 +1,68 @@
+name: Bitcoin Core Patch CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Clone Bitcoin Core
+      run: |
+        git clone https://github.com/bitcoin/bitcoin.git bitcoin/
+        cd bitcoin
+        git checkout v25.0  # Use a stable version
+    
+    - name: Apply Patch
+      run: |
+        cd bitcoin
+        git apply ../patch/0001-add-op_checkpqcverify.patch
+    
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential libtool autotools-dev automake pkg-config bsdmainutils python3
+        sudo apt-get install -y libevent-dev libboost-dev libsqlite3-dev
+        sudo apt-get install -y libminiupnpc-dev libnatpmp-dev
+        sudo apt-get install -y libzmq3-dev
+        sudo apt-get install -y libqrencode-dev
+        sudo apt-get install -y libdb-dev libdb++-dev
+    
+    - name: Configure and Build
+      run: |
+        cd bitcoin
+        ./autogen.sh
+        ./configure --disable-wallet --with-gui=no
+        make -j$(nproc)
+    
+    - name: Run Tests
+      run: |
+        cd bitcoin
+        make check
+
+  docker-test:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Build Docker Images
+      run: |
+        docker-compose build
+    
+    - name: Test Docker Network
+      run: |
+        docker-compose up -d
+        sleep 30  # Wait for nodes to start
+        docker-compose ps  # Check node status
+        docker-compose logs  # Show logs
+        docker-compose down 
