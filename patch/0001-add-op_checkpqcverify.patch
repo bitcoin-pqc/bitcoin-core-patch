@@ -1,0 +1,14 @@
+From: Mayckon Giovani <doomhammerhell@gmail.com>
+Subject: [PATCH] add OP_CHECKPQCVERIFY opcode
+
+---
+ src/script/interpreter.cpp | 3 +++
+ 1 file changed, 3 insertions(+)
+
+--- a/src/script/interpreter.cpp
++++ b/src/script/interpreter.cpp
+@@ -NNNN,6 +NNNN,9 @@
+     // TODO: implement post-quantum signature verification
++    case OP_CHECKPQCVERIFY:
++        // TODO: call verify_pqc_signature(publicKey, signature, messageHash);
++        break;
