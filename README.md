@@ -1,4 +1,4 @@
-# bitcoin-pqc
+# bitcoin-core-patch
 
 ## Description
 
