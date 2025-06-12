@@ -28,6 +28,8 @@ An extension for Bitcoin Core that adds post-quantum cryptographic (PQC) support
    ```bash
    git clone https://github.com/bitcoin-pqc/bitcoin-core-patch.git
    cd bitcoin-core-patch
+   # Initialize PQClean submodule
+   git submodule update --init --recursive
    ```
 
 2. Build and Test:
@@ -101,4 +103,9 @@ This project is licensed under the MIT License.
 ## Topics
 
 `post-quantum`, `bitcoin`, `c++`, `pqc`, `kyber`, `dilithium`, `falcon`, `cryptography`
+
+## Notes
+
+- This project depends on [PQClean](https://github.com/PQClean/PQClean) as a git submodule, located in `externals/PQClean`. Always initialize submodules after cloning.
+- PQClean provides the reference implementation for Dilithium3 and other post-quantum signature schemes used by OP_CHECKPQCVERIFY.
 
