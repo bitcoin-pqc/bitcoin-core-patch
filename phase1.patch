@@ -1,0 +1,33 @@
+From 6585439a32c10703367bd885ab6c423d0dc566c0 Mon Sep 17 00:00:00 2001
+From: doomhammerhell <maiconrlyeh@gmail.com>
+Date: Tue, 10 Jun 2025 22:12:23 -0400
+Subject: [PATCH] Add stub for OP_CHECKPQCVERIFY opcode
+
+---
+ patch/0001-add-op_checkpqcverify.patch | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 patch/0001-add-op_checkpqcverify.patch
+
+diff --git a/patch/0001-add-op_checkpqcverify.patch b/patch/0001-add-op_checkpqcverify.patch
+new file mode 100644
+index 0000000..bbf774c
+--- /dev/null
++++ b/patch/0001-add-op_checkpqcverify.patch
+@@ -0,0 +1,14 @@
++From: Mayckon Giovani <doomhammerhell@gmail.com>
++Subject: [PATCH] add OP_CHECKPQCVERIFY opcode
++
++---
++ src/script/interpreter.cpp | 3 +++
++ 1 file changed, 3 insertions(+)
++
++--- a/src/script/interpreter.cpp
+++++ b/src/script/interpreter.cpp
++@@ -NNNN,6 +NNNN,9 @@
++     // TODO: implement post-quantum signature verification
+++    case OP_CHECKPQCVERIFY:
+++        // TODO: call verify_pqc_signature(publicKey, signature, messageHash);
+++        break;
+-- 
+2.39.5 (Apple Git-154)
+
